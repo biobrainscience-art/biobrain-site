@@ -1,7 +1,7 @@
 // Builds blog posts from content/blog/*.md into posts/*.html and fills the list in blog.html.
 // No dependencies. Runs on Netlify before publishing (see netlify.toml).
 const fs = require('fs'), path = require('path');
-const SITE = 'https://biobrain.nl'; // update when the domain is final
+const SITE = 'https://biobrainscience.com'; // update when the domain is final
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const niceDate = d => { const m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? `${+m[3]} ${months[+m[2]-1]} ${m[1]}` : String(d); };
