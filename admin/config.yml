@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: biobrainscience-art/biobrain-site
+  branch: main
+
+media_folder: images/blog
+public_folder: /images/blog
+
+collections:
+  - name: blog
+    label: Blog posts
+    label_singular: Blog post
+    folder: content/blog
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} – {{date}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: Summary (shown on the blog page and in Google), name: summary, widget: text }
+      - { label: Image (optional), name: image, widget: image, required: false }
+      - { label: Image description (alt text), name: image_alt, widget: string, required: false }
+      - { label: Post, name: body, widget: markdown }
