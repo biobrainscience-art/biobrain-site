@@ -414,3 +414,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--royal);outline-offs
 .post-body h2{font-size:1.6rem;color:var(--navy);margin:38px 0 14px}
 .post-meta{color:var(--muted)}
 .post-back{margin-top:40px}.post-back a{color:var(--teal-dark);font-weight:600}
+
+/* Blog post images (from the CMS) */
+.post-body img{max-width:100%;height:auto;border-radius:14px;margin:8px 0 20px}
+.post-body blockquote{border-left:3px solid var(--teal);margin:20px 0;padding:4px 0 4px 18px;color:var(--muted)}
+.post-body ul,.post-body ol{margin:0 0 18px 22px}

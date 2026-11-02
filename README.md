@@ -58,7 +58,12 @@ Build command: leave empty. Publish directory: `.` (the repository root).
 ## Changing the application link
 Open `script.js` and edit the single line `var BIOBRAIN_APP_URL=...` at the top. Every "Launch BioBrain" button on the site uses it. (The same address also appears as a fallback inside the HTML buttons; the script replaces it.)
 
-## Adding a blog post
-1. Copy `post-template.html` to `post-your-title.html` and write the post (also delete the `noindex` line in its head).
-2. Open `blog.html`, copy the commented card example into `<div class="posts">`, fill it in (newest first). The "first posts are on their way" message hides itself once a card exists.
-3. Re-upload the site.
+## Blog (Decap CMS)
+Write posts at `/admin` on the live site (log in with GitHub). Click **New Blog post**, write, then **Publish**. Netlify rebuilds the site automatically and the post appears on the blog page within about a minute.
+Posts are stored as files in `content/blog/`; `build.js` turns them into pages in `posts/` and fills the list in `blog.html` and `sitemap.xml`. Do not edit those generated files by hand.
+One-time setup: see "Blog login setup" below.
+
+### Blog login setup (once)
+1. GitHub: Settings > Developer settings > OAuth Apps > New OAuth App. Homepage URL: your site address. Authorization callback URL: `https://api.netlify.com/auth/done`. Create it and generate a client secret.
+2. Netlify: Project configuration > Access & security > OAuth > Install provider > GitHub. Paste the Client ID and Secret.
+3. Open `your-site/admin` and log in with GitHub.
