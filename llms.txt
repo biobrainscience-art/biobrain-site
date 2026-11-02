@@ -1,0 +1,12 @@
+# BioBrain
+
+> BioBrain develops practical, science-based AI applications. It combines neuroscience, psychology, cognitive science and information management with a human-centered approach. Founded by Yuval Gal-Shahaf (MSc Applied Neuroscience, King's College London).
+
+## Pages
+- [Home](index.html): What BioBrain does.
+- [AI Solutions](ai-solutions.html): Human-AI interaction, Scientific Intelligence, science-based wellness AI, regulatory implementation support, business AI and automation.
+- [Scientific Intelligence](scientific-intelligence.html): AI-powered platform for scientific literature analysis: Understand, Compare, Ask, Export.
+- [About the Founder](about.html): Background, expertise, education and writing.
+- [Research summary: oxidative stress and the post-COVID brain](research-summary.html): MSc research proposal (no data collected).
+- [Review summary: protecting the brain while treating the infection](review-summary.html): Unpublished narrative review; not clinical guidance.
+- [Contact](contact.html): Project enquiries.
