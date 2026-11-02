@@ -1,3 +1,5 @@
 # TEMPORARY: site is not public yet. Restore the full robots.txt (see robots.live.txt) when launching.
+# The share image stays fetchable so link previews (WhatsApp, LinkedIn) work.
 User-agent: *
+Allow: /images/og-image.jpg
 Disallow: /
