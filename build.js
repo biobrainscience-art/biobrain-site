@@ -59,7 +59,7 @@ posts.forEach(p => {
   let h = tpl.replace(/<meta name="robots" content="noindex">\s*/,'');
   h = h.replace(/(href|src)="(?!https?:|#|\/|mailto:)([^"]+)"/g, '$1="../$2"');
   h = h.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(p.title)} – BioBrain Blog</title>`);
-  h = h.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(p.summary)}">\n<link rel="canonical" href="${SITE}/posts/${p.slug}.html">\n<meta property="og:title" content="${esc(p.title)}">\n<meta property="og:description" content="${esc(p.summary)}">\n<meta property="og:type" content="article">` + (p.image ? `\n<meta property="og:image" content="${SITE}${p.image}">` : ''));
+  h = h.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(p.summary)}">\n<link rel="canonical" href="${SITE}/posts/${p.slug}.html">\n<meta property="og:title" content="${esc(p.title)}">\n<meta property="og:description" content="${esc(p.summary)}">\n<meta property="og:type" content="article">` + `\n<meta property="og:image" content="${SITE}${p.image || '/images/og-image.jpg'}">\n<meta property="og:url" content="${SITE}/posts/${p.slug}.html">\n<meta name="twitter:card" content="summary_large_image">`);
   h = h.replace(/<h1>Post title<\/h1>/, `<h1>${esc(p.title)}</h1>`);
   h = h.replace(/<p class="sub post-meta">[\s\S]*?<\/p>/, `<p class="sub post-meta">${niceDate(p.date)}${p.category ? ' &middot; ' + esc(p.category) : ''} &middot; ${esc(p.author)}</p>`);
   const img = p.image ? `<img class="post-img" src="${p.image}" alt="${esc(p.alt)}">\n      ` : '';
