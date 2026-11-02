@@ -49,7 +49,7 @@ const tpl = read('post-template.html');
 const dir = 'content/blog';
 const posts = (fs.existsSync(dir) ? fs.readdirSync(dir).filter(f=>f.endsWith('.md')) : []).map(f => {
   const { meta, body } = parse(read(path.join(dir,f)));
-  return { slug: f.replace(/\.md$/,''), title: meta.title || f, date: meta.date || '', summary: meta.summary || '', image: meta.image || '', alt: meta.image_alt || '', body };
+  return { slug: f.replace(/\.md$/,''), title: meta.title || f, date: meta.date || '', summary: meta.summary || '', category: meta.category || '', author: meta.author || 'BioBrain', image: meta.image || '', alt: meta.image_alt || '', body };
 }).sort((a,b)=> String(b.date).localeCompare(String(a.date)));
 
 fs.mkdirSync('posts', { recursive: true });
@@ -61,18 +61,18 @@ posts.forEach(p => {
   h = h.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(p.title)} – BioBrain Blog</title>`);
   h = h.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(p.summary)}">\n<link rel="canonical" href="${SITE}/posts/${p.slug}.html">\n<meta property="og:title" content="${esc(p.title)}">\n<meta property="og:description" content="${esc(p.summary)}">\n<meta property="og:type" content="article">` + (p.image ? `\n<meta property="og:image" content="${SITE}${p.image}">` : ''));
   h = h.replace(/<h1>Post title<\/h1>/, `<h1>${esc(p.title)}</h1>`);
-  h = h.replace(/<p class="sub post-meta">[\s\S]*?<\/p>/, `<p class="sub post-meta">${niceDate(p.date)} &middot; Yuval Gal-Shahaf</p>`);
+  h = h.replace(/<p class="sub post-meta">[\s\S]*?<\/p>/, `<p class="sub post-meta">${niceDate(p.date)}${p.category ? ' &middot; ' + esc(p.category) : ''} &middot; ${esc(p.author)}</p>`);
   const img = p.image ? `<img class="post-img" src="${p.image}" alt="${esc(p.alt)}">\n      ` : '';
   h = h.replace(/(<div class="wrap post-body">)[\s\S]*?(<p class="post-back">)/, (_,a,b)=>`${a}\n      ${img}${md(p.body)}\n      ${b}`);
-  const ld = `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Article",headline:p.title,datePublished:p.date,description:p.summary,author:{"@type":"Person",name:"Yuval Gal-Shahaf"},publisher:{"@type":"Organization",name:"BioBrain"}})}</script>\n`;
+  const ld = `<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Article",headline:p.title,datePublished:p.date,description:p.summary,author:{"@type":p.author==="Yuval Gal-Shahaf"?"Person":"Organization",name:p.author},publisher:{"@type":"Organization",name:"BioBrain"}})}</script>\n`;
   h = h.replace('</head>', ld + '</head>');
   fs.writeFileSync(`posts/${p.slug}.html`, h);
 });
 
 // blog list
-const cards = posts.map(p => `      <article class="post-card reveal">
+const cards = posts.map(p => `      <article class="post-card reveal" data-cat="${esc(p.category)}">
         <a href="posts/${p.slug}.html">
-          <span class="post-date">${niceDate(p.date)}</span>
+          <span class="post-date">${niceDate(p.date)}${p.category ? ' &middot; <span class="post-cat">' + esc(p.category) + '</span>' : ''}</span>
           <h2>${esc(p.title)}</h2>
           <p>${esc(p.summary)}</p>
           <span class="more">Read the post <span aria-hidden="true">&rarr;</span></span>
@@ -80,6 +80,9 @@ const cards = posts.map(p => `      <article class="post-card reveal">
       </article>`).join('\n');
 let blog = read('blog.html');
 blog = blog.replace(/<!--POSTS-->[\s\S]*?<!--\/POSTS-->/, `<!--POSTS-->\n${cards}\n      <!--/POSTS-->`);
+const cats = [...new Set(posts.map(p=>p.category).filter(Boolean))];
+const filters = cats.length > 1 ? `<div class="post-filters" role="group" aria-label="Filter by category"><button class="on" data-f="">All</button>${cats.map(c=>`<button data-f="${esc(c)}">${esc(c)}</button>`).join('')}</div>` : '';
+blog = blog.replace(/<!--FILTERS-->[\s\S]*?<!--\/FILTERS-->/, `<!--FILTERS-->${filters}<!--/FILTERS-->`);
 blog = blog.replace(/<div class="blog-empty[\s\S]*?<\/div>\s*(?=<\/div>\s*<\/section>)/, posts.length ? '' : '$&');
 fs.writeFileSync('blog.html', blog);
 

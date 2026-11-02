@@ -45,6 +45,7 @@
 
   <section class="block blog-list">
     <div class="wrap">
+      <!--FILTERS--><!--/FILTERS-->
       <div class="posts">
       <!--POSTS-->
 
@@ -69,5 +70,11 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+document.querySelectorAll('.post-filters button').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.post-filters button').forEach(function(x){x.classList.toggle('on',x===b)});
+  document.querySelectorAll('.post-card').forEach(function(c){c.hidden=b.dataset.f&&c.dataset.cat!==b.dataset.f});
+});});
+</script>
 </body>
 </html>

@@ -419,3 +419,10 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--royal);outline-offs
 .post-body img{max-width:100%;height:auto;border-radius:14px;margin:8px 0 20px}
 .post-body blockquote{border-left:3px solid var(--teal);margin:20px 0;padding:4px 0 4px 18px;color:var(--muted)}
 .post-body ul,.post-body ol{margin:0 0 18px 22px}
+
+/* Blog categories + filters */
+.post-cat{color:var(--teal-dark);font-weight:600}
+.post-card[hidden]{display:none}
+.post-filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+.post-filters button{font:600 .9rem Inter,sans-serif;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer}
+.post-filters button.on,.post-filters button:hover{background:var(--teal);border-color:var(--teal);color:#fff}

@@ -20,6 +20,16 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - label: Category
+        name: category
+        widget: select
+        default: "AI & Humans"
+        options: ["AI & Humans", "Neuroscience", "Scientific Intelligence", "AI in Practice", "Reflections"]
+      - label: Author
+        name: author
+        widget: select
+        default: "BioBrain"
+        options: ["BioBrain", "Yuval Gal-Shahaf", "Written with AI"]
       - { label: Summary (shown on the blog page and in Google), name: summary, widget: text }
       - { label: Image (optional), name: image, widget: image, required: false }
       - { label: Image description (alt text), name: image_alt, widget: string, required: false }
