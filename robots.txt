@@ -1,14 +1,3 @@
+# TEMPORARY: site is not public yet. Restore the full robots.txt (see robots.live.txt) when launching.
 User-agent: *
-Allow: /
-
-# AI crawlers are welcome
-User-agent: GPTBot
-Allow: /
-User-agent: ClaudeBot
-Allow: /
-User-agent: PerplexityBot
-Allow: /
-User-agent: Google-Extended
-Allow: /
-
-Sitemap: https://biobrain.nl/sitemap.xml
+Disallow: /
