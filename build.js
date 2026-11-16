@@ -87,6 +87,6 @@ blog = blog.replace(/<div class="blog-empty[\s\S]*?<\/div>\s*(?=<\/div>\s*<\/sec
 fs.writeFileSync('blog.html', blog);
 
 // sitemap
-const pages = ['index','about','ai-solutions','scientific-intelligence','blog','contact'].map(n=>n==='index'?'':`${n}.html`).concat(posts.map(p=>`posts/${p.slug}.html`));
+const pages = ['index','about','ai-solutions','scientific-intelligence','blog','contact','research-summary','review-summary'].map(n=>n==='index'?'':`${n}.html`).concat(posts.map(p=>`posts/${p.slug}.html`));
 fs.writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(u=>`  <url><loc>${SITE}/${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log(`Built ${posts.length} post(s).`);
